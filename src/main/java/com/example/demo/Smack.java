@@ -42,7 +42,7 @@ public class Smack {
 
             config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled); //不開啟安全模式
 
-            config.setUsernameAndPassword("tgfc045", "Tgfc@3B1234");
+            config.setUsernameAndPassword("user1", "1234");
 //            config.setUsernameAndPassword(userNameAndPasswor, userNameAndPasswor);
             config.setConnectTimeout(86400000);
 //            config.setHost("104.199.161.206");
@@ -59,7 +59,7 @@ public class Smack {
             mConnection.login(); //Logs in
             //聊天
             ChatManager chatManager = ChatManager.getInstanceFor(mConnection);
-            EntityBareJid jid = JidCreate.entityBareFrom("tgfc045"+"@desktop-ph8lrjf.tgfc.tw");
+            EntityBareJid jid = JidCreate.entityBareFrom("admin"+"@desktop-ph8lrjf.tgfc.tw");
             Chat chat = chatManager.chatWith(jid);
             chat.send(user()+"登入了!");
             System.out.println("Esta conectat? " + mConnection.isConnected());
@@ -68,7 +68,7 @@ public class Smack {
             chatManager.addIncomingListener(new IncomingChatMessageListener() {
                 @Override
                 public void newIncomingMessage(EntityBareJid from, Message message, Chat chat) {
-                    if (null != message.getBody()&&"tgfc045".equals(from.getLocalpart().toString())) {
+                    if (null != message.getBody()&&"admin".equals(from.getLocalpart().toString())) {
 //                        (null != message.getBody()&&"admin".equals(from.getLocalpart().toString()))
                         frame = new JFrame();
                         frame(message.getBody());
