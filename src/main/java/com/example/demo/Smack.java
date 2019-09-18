@@ -29,6 +29,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Base64;
 
 public class Smack {
 
@@ -36,13 +37,21 @@ public class Smack {
 
     public static void main(String[] args)   {
         try {
-            String userNameAndPasswor = user();
+            String userName = user();
+//            String userNameAndPasswor = user();
             XMPPTCPConnection.setUseStreamManagementDefault(false);
             XMPPTCPConnectionConfiguration.Builder config = XMPPTCPConnectionConfiguration.builder(); //XmppDomain 配置
 
             config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled); //不開啟安全模式
 
-            config.setUsernameAndPassword("user1", "1234");
+            //Base64
+            Base64.Encoder encoder = Base64.getEncoder();
+            String text = userName;
+            byte[] textByte = text.getBytes("UTF-8");
+            String password = encoder.encodeToString(textByte);
+
+            config.setUsernameAndPassword(userName,password);
+//            config.setUsernameAndPassword("user1", "1234");
 //            config.setUsernameAndPassword(userNameAndPasswor, userNameAndPasswor);
             config.setConnectTimeout(86400000);
 //            config.setHost("104.199.161.206");
